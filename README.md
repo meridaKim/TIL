@@ -7,7 +7,7 @@ Today I Learn ...
 # 자바를 자바보자
 ## 2023.07.01~ 07.29일(5주간 진행)
 <img src="https://img.shields.io/badge/java-007396?style=flat-square&logo=java&logoColor=white"/>
-### ✨단 기간 안에 빠르게 자바를 자바보자!
+###✨단 기간 안에 빠르게 자바를 자바보자!
 
 
 | no | chapter |  
