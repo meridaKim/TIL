@@ -45,42 +45,130 @@ int y = 0B10100;
 * 변수에 허용 범위를 초과한 값을 대입하면 __컴파일 오류 발생__
 
 * long 타입은 "l(L)"을 붙여 컴파일러에게 알린다.
-* 
-### 2.3 바이트코드 파일과 자바 가상 머신
-
-* 자바 언어로 작성한 소스 파일의 확장명은 .java
-* 바이트코드 파일 : 자바로 작성한 후 컴파일 해야 한다. javac는 소스 파일을 컴파일한다. 결과로는 .class인 바이트코드 파일이 생성된다.
-* 자바 가상 머신 : 자바 가상 머신을 구동 시키면 바이트코드 파일이 완전한 기계어로 변역된다. 이를 실행시킨다. 바이트코드 파일은 운영체제와 상관 없지만, 자바 가상 머신은 운영체제에서 이해하는 기계어로 번역해야 하므로 운영체제별로 다르게 설치된다.
-
-### JRE
-* execution evironment JRE : JavaSE 버전 기준으로 컴파일하고 실행, 빌드 번호와 상관없이 javaSE 버전에 중점 두어 선택   
-* project specific JRE : 선택된 JDK 기준으로 소스 파일을 컴파일하고 실행
-* default JRE 'xxx' and workspace compiler preferences : 이클립스의 기본 자바 버전 사용
-
-### Java, JDK, JRE, JavaSE
-* 자바 개발 도구에 중점 : JDK 17
-* 자바 실행 환경에 중점 : JRE 17
-* 자바 스펙 내용에 중점 : JavaSE-17
-* JavaSE는 자바 개발에서부터 실행까지의 모든 환경을 정의한 스펙을 말한다. 스펙을 준수해서 만든 것이 Open JDK, Oracle JDK.
-
-### 1.10 코드 용어 이해
-* 클래스 명은 숫자로 시작할 수 없고, 공백을 포함해서는 안된다.
-* 클래스 블록 = {}
-* public sta\tic void main(String[] args){} : 메소드 main 선언, 바이트코드를 실행하면 main() 메소드 블록이 실행된다. 프로그램 실행 진입점이라고도 부른다.
-
-### 1.11 코드 주석달기
-
-|구분|주석 기호|설명|
-|---|---|---|
-|행 주석|// ...|//부터 행 끝까지 주석 처리|
-|범위 주석|/*...*/|/*과 */.사이 내용을 모두 주석 처리|
-|도큐먼트 주석|/**..*/|사이 내용을 모두 주석 처리, javadoc 명령어로 API 도큐먼트를 생성하는 데 사용한다.|
-
-* 문자열 사이에 주석 기호 사용 불가.
-
-### 1.12 실행문과 세미콜론
-실행문은 메소드 블록 내부에 여러개 작성된다. 실행문 끝에는 반드시 세미 콜론을 붙여야 한다  .
 
 
+### 2.3 문자 타입(char)
+
+* 하나의 문자를 작은 따옴표(')로 감산 것을 문자 리터럴이라고 한다.
+*  유니코드로 변환되어 저장된다. 
+`A -> 65(10진수),0x0041(16진수) / 가 -> 44032`
+* 문자 타입 초기화 : 공백문자(유니코드 : 32)를 포함해서 초기화한다
+`char c = ' ';`
+
+### 실수 타입 : 부동 소수점 방식으로 메모리에 저장
+| 타입      | 메모리 크기                                         | 유효 소수 이하 자리 |
+|---------|------------------------------------------------|------------|
+| float   | 4byte / 32bit(1bit[부호비트]+8bit[지수]+23bit[가수])   | 7자리        |
+| double  | 8byte / 64bit (1bit[부호비트]+11bit[지수]+52bit[가수]) | 8자리        |
+
+* double 타입은 float 타입보다 약 2배의 유효 자릿수를 가지기 때문에 보다 정확한 데이터 저장이 가능하다.
+
+### 2.5 논리 타입
+`boolean 타입 : true/false`
+
+### 2.6 문자열 타입
+* 여러 개의 문자들을 ""(큰 따옴표)로 감싸면 문자열
+* 문자열은 __String__ 타입을 사용하여 저장한다.
+#### 이스케이프 문자 : 역슬래쉬가 붙은 문자
+
+| 이스케이프 문자 |                       |
+|----------|-----------------------|
+| \"       | " 문자 포함               |
+| \'       | ' 문자 포함               |
+| \\       | \ 문자 포함               |
+| \u16진수   | 16진수 유니코드에 해당하는 문자 포함 |
+| \t       | 출력 시 탭만큼 띄움           |
+| \n       | 출력 시 줄바꿈              |
+| \r       | 출력 시 캐리지 리턴           |
 
 
+### 2.7 자동 타입 변환
+* 허용 범위가 작은 타입이 허용 범위가 큰 타입으로 대입될 때 발생
+
+`byte < short, char < int < long < float < double`
+
+* char -> int
+```
+char charVaule = 'A'
+int intValue = charValue; // 65 저장
+```
+
+* 예외 : char 타입보다 허용 범위가 작은 byte 타입은 char 타입으로 자동 변환될 수 없다. 
+char는 음수 포함하지 않지만 byte은 __음수 포함!__
+
+### 2.8 강제 타입 변환
+* 큰 허용 범위 타입을 작은 허용 범위 타입으로 __쪼개어서 저장__
+* int -> byte 
+* long-> int 
+* int-> char 
+* 실수(float, double) -> 정수(byte, short, int, long)
+
+### 2.9 연산식에서 자동 타입 변환
+```
+byte x = 10;
+byte y = 20;
+byte result = x+y; //컴파일 에러 발생
+int result = x+y ;
+```
+
+```
+int intValue = 10;
+double doubleValue = 5.5;
+double result = intValue+doubleValue; //intValue가 double로 자동 변환
+```
+```
+int intValue = 10;
+double doubleValue = 5.5;
+int result = intValue+(int)doubleValue; //int타입 연산이 필요하면 강제 변환
+```
+```
+int x = 1;
+int y = 2;
+double result = x/y; //결과는 0.0
+
+/*
+x와 y 중에 하나, 또는 둘다 double 타입으로 변경해야 결과가 0.5
+*/
+```
+* +연산자는 문자열끼리 합치기
+```
+int intValue = 3+7; -> 10
+String str = "3"+7; ->37
+String str = 3+"7"; ->37
+String str = 1 +(2+3); -> 15
+String str = 1 +"2" + 3;  -> 123
+String str = 1 + 2 +"3"; -> 33
+String str = "1" + (2+3); -> 중괄호에 의해 덧셈 연산 우선 수행
+```
+
+### 2.10 문자열을 기본 타입으로 변환
+| 변환 타입             | 사용 예                    |
+|-------------------|-------------------------|
+| String -> byte    | Byte.parseByte();       |
+| String -> short   | Short.parseShort();     |
+| String -> int     | Integer.parseInt();     |
+| String -> long    | Long.parseLong();       |
+| String -> float   | Float.parseFloat();     |
+| String -> double  | Double.parseDouble();   |
+| String -> boolean | Boolean.parseBoolean(); |
+
+### 2. 12 콘솔로 변수값 출력
+| 메소드             | 의미                         |
+|-----------------|----------------------------|
+| println()       | 괄호 안의 내용을 출력하고 __행간을 바꿔라__ |
+| print()         | 괄호 안의 내용을 출력하고 행간 바꾸지 말아라  |
+| printf("%d", a) | 형식 문자열에 맞추어 뒤의 값을 출력해라     |
+
+#### 형식화된 문자열
+* 정수 : %d
+* 실수 : %f
+* 문자열 : %s
+* 특수 문자:  \t, \n
+
+### 2.13 키보드 입력 데이터를 변수에 저장
+
+`Scanner scan = new Scanner(System.in);`
+`String input = scan. nextLine(); // Enter키 누르면 입력된 문자열을 읽고 변수 input에 저장`
+
+* 자바의 기본타입(byte, short, int, long, float,doulbe, boolean) 동일한지 비교할 때는 "==" 사용
+* String 동일한지 비교할 때는 equals()를 사용한다.
