@@ -13,11 +13,11 @@ Today I Learn ...
 
 | no | chapter |  
 |---|---|
-|1| 자바 시작하기
-|2| 변수와 타입
-|3| 연산자
-|4| 조건문과 반복문
-|5| 참조 타입
-|6| 클래스
-|7| 상속
-|8| 인터페이스
+|1| [자바 시작하기](https://github.com/meridaKim/TIL/blob/main/Java/Chapter01.md)
+|2| [변수와 타입](https://github.com/meridaKim/TIL/blob/main/Java/Chapter02.md)
+|3| [연산자](https://github.com/meridaKim/TIL/blob/main/Java/Chapter03.md)
+|4| [조건문과 반복문](https://github.com/meridaKim/TIL/blob/main/Java/Chapter04.md)
+|5| [참조 타입](https://github.com/meridaKim/TIL/blob/main/Java/Chapter05.md)
+|6| [클래스](https://github.com/meridaKim/TIL/blob/main/Java/Chapter06.md)
+|7| [상속](https://github.com/meridaKim/TIL/blob/main/Java/Chapter07.md)
+|8| [인터페이스](https://github.com/meridaKim/TIL/blob/main/Java/Chapter08.md)
